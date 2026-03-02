@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "id": "hypertension",
+      "label": "고혈압",
+      "type": "condition",
+      "properties": {
+        "definition": "수축기 혈압 140mmHg 이상 또는 이완기 혈압 90mmHg 이상",
+        "prevalence": "한국 성인 약 30%",
+        "icd10": "I10"
+      }
+    },
+    {
+      "id": "ace_inhibitors",
+      "label": "ACE 억제제",
+      "type": "drug_class",
+      "properties": {
+        "mechanism": "안지오텐신 전환효소 억제",
+        "examples": ["ramipril", "enalapril", "lisinopril"],
+        "common_side_effects": ["마른기침", "고칼륨혈증"]
+      }
+    },
+    {
+      "id": "arb",
+      "label": "ARB (안지오텐신 수용체 차단제)",
+      "type": "drug_class",
+      "properties": {
+        "mechanism": "AT1 수용체 차단",
+        "examples": ["losartan", "valsartan", "telmisartan"],
+        "advantage": "ACE 억제제 대비 기침 부작용 적음"
+      }
+    },
+    {
+      "id": "diabetes_mellitus",
+      "label": "당뇨병",
+      "type": "condition",
+      "properties": {
+        "definition": "인슐린 분비 또는 작용 장애로 인한 고혈당",
+        "types": ["제1형", "제2형", "임신성"]
+      }
+    },
+    {
+      "id": "ontarget_study",
+      "label": "ONTARGET 연구",
+      "type": "study",
+      "properties": {
+        "year": 2008,
+        "finding": "telmisartan과 ramipril의 심혈관 예후 동등",
+        "journal": "NEJM"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "hypertension",
+      "target": "ace_inhibitors",
+      "relation": "treated_by",
+      "weight": 0.9
+    },
+    {
+      "source": "hypertension",
+      "target": "arb",
+      "relation": "treated_by",
+      "weight": 0.9
+    },
+    {
+      "source": "ace_inhibitors",
+      "target": "arb",
+      "relation": "alternative_to",
+      "weight": 0.8
+    },
+    {
+      "source": "hypertension",
+      "target": "diabetes_mellitus",
+      "relation": "comorbid_with",
+      "weight": 0.7
+    },
+    {
+      "source": "ontarget_study",
+      "target": "ace_inhibitors",
+      "relation": "evaluates",
+      "weight": 1.0
+    },
+    {
+      "source": "ontarget_study",
+      "target": "arb",
+      "relation": "evaluates",
+      "weight": 1.0
+    }
+  ]
+}

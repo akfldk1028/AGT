@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/persona.schema.json",
+  "title": "AGT Persona",
+  "description": "Agent personality, behavior, and system prompt",
+  "type": "object",
+  "required": ["system_prompt", "name"],
+  "properties": {
+    "system_prompt": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The agent's system prompt"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Agent's display name"
+    },
+    "role": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Agent's role description"
+    },
+    "traits": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 50 },
+      "maxItems": 20,
+      "description": "Personality traits"
+    },
+    "communication_style": {
+      "type": "object",
+      "properties": {
+        "tone": {
+          "type": "string",
+          "enum": ["professional", "casual", "academic", "friendly", "formal"]
+        },
+        "language": {
+          "type": "string",
+          "description": "Primary language (ISO 639-1 code)"
+        },
+        "formality": {
+          "type": "string",
+          "enum": ["formal", "informal", "adaptive"]
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Behavioral constraints and rules"
+    },
+    "examples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["user", "assistant"],
+        "properties": {
+          "user": { "type": "string" },
+          "assistant": { "type": "string" }
+        }
+      },
+      "description": "Few-shot conversation examples"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/appearance.schema.json",
+  "title": "AGT Appearance",
+  "description": "2D procedural agent visual appearance — face structure, colors, outfit, and emotion mapping",
+  "type": "object",
+  "required": ["face_params", "colors"],
+  "properties": {
+    "face_params": {
+      "type": "object",
+      "description": "7 structural face parameters (0-1 normalized)",
+      "required": ["head_shape", "eye_size", "eye_spacing", "nose_size", "mouth_width", "brow_thickness", "chin_length"],
+      "properties": {
+        "head_shape": { "type": "number", "minimum": 0, "maximum": 1, "description": "round (0) to angular (1)" },
+        "eye_size": { "type": "number", "minimum": 0, "maximum": 1, "description": "small (0) to large (1)" },
+        "eye_spacing": { "type": "number", "minimum": 0, "maximum": 1, "description": "close (0) to wide (1)" },
+        "nose_size": { "type": "number", "minimum": 0, "maximum": 1, "description": "small (0) to large (1)" },
+        "mouth_width": { "type": "number", "minimum": 0, "maximum": 1, "description": "narrow (0) to wide (1)" },
+        "brow_thickness": { "type": "number", "minimum": 0, "maximum": 1, "description": "thin (0) to thick (1)" },
+        "chin_length": { "type": "number", "minimum": 0, "maximum": 1, "description": "short (0) to long (1)" }
+      },
+      "additionalProperties": false
+    },
+    "colors": {
+      "type": "object",
+      "description": "Agent color palette",
+      "required": ["skin", "hair", "eye", "outfit"],
+      "properties": {
+        "skin": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "hair": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "eye": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "outfit": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+      },
+      "additionalProperties": false
+    },
+    "outfit": {
+      "type": "object",
+      "properties": {
+        "style": {
+          "type": "string",
+          "enum": ["casual", "formal", "lab-coat", "hoodie", "suit", "hanbok"],
+          "description": "Outfit preset"
+        },
+        "accessories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Accessory IDs (glasses, hat, etc.)"
+        }
+      }
+    },
+    "personality_visual": {
+      "type": "object",
+      "description": "Big Five personality traits that affect expression intensity at runtime",
+      "properties": {
+        "openness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "conscientiousness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "extraversion": { "type": "number", "minimum": 0, "maximum": 1, "description": "Controls expressiveness (0.5-1.3x scale)" },
+        "agreeableness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "neuroticism": { "type": "number", "minimum": 0, "maximum": 1, "description": "Controls blink/breath rates" }
+      },
+      "additionalProperties": false
+    },
+    "emotion_bases": {
+      "type": "object",
+      "description": "Custom Plutchik 8-vector emotion basis overrides. Each key maps a pure emotion to 14 expression parameters.",
+      "properties": {
+        "joy": { "$ref": "#/$defs/expression_basis" },
+        "anger": { "$ref": "#/$defs/expression_basis" },
+        "sadness": { "$ref": "#/$defs/expression_basis" },
+        "surprise": { "$ref": "#/$defs/expression_basis" },
+        "disgust": { "$ref": "#/$defs/expression_basis" },
+        "fear": { "$ref": "#/$defs/expression_basis" },
+        "trust": { "$ref": "#/$defs/expression_basis" },
+        "anticipation": { "$ref": "#/$defs/expression_basis" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "expression_basis": {
+      "type": "object",
+      "description": "14 expression parameters when this emotion is at 100%",
+      "properties": {
+        "eye_openness": { "type": "number", "minimum": 0, "maximum": 1 },
+        "pupil_dilation": { "type": "number", "minimum": 0, "maximum": 1 },
+        "brow_raise": { "type": "number", "minimum": -1, "maximum": 1 },
+        "brow_furrow": { "type": "number", "minimum": 0, "maximum": 1 },
+        "mouth_curve": { "type": "number", "minimum": -1, "maximum": 1 },
+        "mouth_open": { "type": "number", "minimum": 0, "maximum": 1 },
+        "cheek_puff": { "type": "number", "minimum": 0, "maximum": 1 },
+        "head_tilt": { "type": "number", "minimum": -1, "maximum": 1 },
+        "head_nod": { "type": "number", "minimum": -1, "maximum": 1 },
+        "body_lean": { "type": "number", "minimum": -1, "maximum": 1 },
+        "shoulder_raise": { "type": "number", "minimum": 0, "maximum": 1 },
+        "gesture_intensity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "blink_rate": { "type": "number", "minimum": 0.05, "maximum": 2.0 },
+        "breath_rate": { "type": "number", "minimum": 0.05, "maximum": 1.0 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

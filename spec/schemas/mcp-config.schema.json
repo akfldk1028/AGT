@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/mcp-config.schema.json",
+  "title": "AGT MCP Configuration",
+  "description": "MCP (Model Context Protocol) tool connections",
+  "type": "object",
+  "required": ["servers"],
+  "properties": {
+    "servers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "transport", "command"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Server display name"
+          },
+          "transport": {
+            "type": "string",
+            "enum": ["stdio", "sse"],
+            "description": "Connection transport type"
+          },
+          "command": {
+            "type": "string",
+            "description": "Command to start the server"
+          },
+          "args": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Command arguments"
+          },
+          "env": {
+            "type": "object",
+            "additionalProperties": { "type": "string" },
+            "description": "Environment variables"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Server URL (for SSE transport)"
+          },
+          "description": {
+            "type": "string",
+            "description": "Server description"
+          }
+        }
+      },
+      "description": "MCP server configurations"
+    },
+    "permissions": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Allowed network domains"
+        },
+        "filesystem": {
+          "type": "string",
+          "enum": ["none", "read", "write"],
+          "description": "Filesystem access level"
+        }
+      },
+      "description": "Security permissions for tools"
+    }
+  },
+  "additionalProperties": false
+}

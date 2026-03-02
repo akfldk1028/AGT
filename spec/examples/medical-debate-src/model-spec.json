@@ -1,0 +1,15 @@
+{
+  "inference": {
+    "preferred": "qwen3:8b",
+    "minimum_params": "7b",
+    "context_length": 16384,
+    "capabilities": ["chat", "tool_use"],
+    "fallback": ["llama3.1:8b", "gemma2:9b"]
+  },
+  "embedding": {
+    "model": "nomic-embed-text",
+    "dimensions": 768
+  },
+  "temperature": 0.6,
+  "top_p": 0.85
+}

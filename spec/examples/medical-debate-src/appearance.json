@@ -1,0 +1,28 @@
+{
+  "face_params": {
+    "head_shape": 0.35,
+    "eye_size": 0.45,
+    "eye_spacing": 0.5,
+    "nose_size": 0.4,
+    "mouth_width": 0.45,
+    "brow_thickness": 0.55,
+    "chin_length": 0.45
+  },
+  "colors": {
+    "skin": "#E0AC69",
+    "hair": "#2C1810",
+    "eye": "#634E34",
+    "outfit": "#f5f5f5"
+  },
+  "outfit": {
+    "style": "lab-coat",
+    "accessories": ["glasses"]
+  },
+  "personality_visual": {
+    "openness": 0.7,
+    "conscientiousness": 0.85,
+    "extraversion": 0.4,
+    "agreeableness": 0.6,
+    "neuroticism": 0.25
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/manifest.schema.json",
+  "title": "AGT Manifest",
+  "description": "Metadata and integrity information for an .agt agent file",
+  "type": "object",
+  "required": ["agt_version", "name", "id", "created_at", "updated_at", "description", "files", "checksum"],
+  "properties": {
+    "agt_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "AGT format version (semver)"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Agent display name"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique agent identifier (UUID v4)"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp (ISO 8601)"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp (ISO 8601)"
+    },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Agent description"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 50 },
+      "maxItems": 20,
+      "description": "Searchable tags"
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "total_conversations": { "type": "integer", "minimum": 0 },
+        "memory_entries": { "type": "integer", "minimum": 0 },
+        "knowledge_nodes": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "files": {
+      "type": "object",
+      "required": ["persona", "model_spec"],
+      "properties": {
+        "persona": { "type": "string" },
+        "model_spec": { "type": "string" },
+        "memory": { "type": "string" },
+        "knowledge": { "type": "string" },
+        "domain": { "type": "string" },
+        "mcp_config": { "type": "string" },
+        "appearance": { "type": "string" }
+      }
+    },
+    "checksum": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 checksum of all content files"
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier"
+    }
+  },
+  "additionalProperties": false
+}

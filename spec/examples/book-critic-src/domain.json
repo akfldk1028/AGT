@@ -1,0 +1,7 @@
+{
+  "name": "book",
+  "expertise_level": "specialist",
+  "topics": ["literary-criticism", "comparative-literature", "narrative-analysis", "cultural-studies"],
+  "evidence_standards": "professional",
+  "terminology_preference": "academic"
+}

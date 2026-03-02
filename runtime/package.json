@@ -1,0 +1,28 @@
+{
+  "name": "@agt/runtime",
+  "version": "0.1.0",
+  "description": "AGT agent runtime engine",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agt/core": "workspace:*",
+    "jszip": "^3.10.1",
+    "better-sqlite3": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0"
+  },
+  "license": "MIT"
+}

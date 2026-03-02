@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/domain.schema.json",
+  "title": "AGT Domain",
+  "description": "Domain expertise configuration",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Domain name"
+    },
+    "expertise_level": {
+      "type": "string",
+      "enum": ["novice", "intermediate", "specialist", "expert"],
+      "description": "Level of domain expertise"
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Specific topic areas within the domain"
+    },
+    "evidence_standards": {
+      "type": "string",
+      "enum": ["anecdotal", "professional", "peer-reviewed", "systematic-review"],
+      "description": "Required evidence quality level"
+    },
+    "terminology_preference": {
+      "type": "string",
+      "enum": ["layperson", "professional", "academic"],
+      "description": "Technical terminology level"
+    }
+  },
+  "additionalProperties": false
+}

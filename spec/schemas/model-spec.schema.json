@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agt.dev/schemas/model-spec.schema.json",
+  "title": "AGT Model Specification",
+  "description": "LLM and embedding model requirements",
+  "type": "object",
+  "required": ["inference", "embedding"],
+  "properties": {
+    "inference": {
+      "type": "object",
+      "required": ["preferred"],
+      "properties": {
+        "preferred": {
+          "type": "string",
+          "description": "Preferred model identifier (e.g., 'qwen3:8b')"
+        },
+        "minimum_params": {
+          "type": "string",
+          "description": "Minimum model size (e.g., '7b', '13b')"
+        },
+        "context_length": {
+          "type": "integer",
+          "minimum": 1024,
+          "description": "Required minimum context length in tokens"
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["chat", "tool_use", "vision", "code"]
+          },
+          "description": "Required model capabilities"
+        },
+        "fallback": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Fallback model identifiers in priority order"
+        }
+      }
+    },
+    "embedding": {
+      "type": "object",
+      "required": ["model", "dimensions"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Embedding model identifier"
+        },
+        "dimensions": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Embedding vector dimensions"
+        }
+      }
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Default sampling temperature"
+    },
+    "top_p": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Default top-p sampling"
+    }
+  },
+  "additionalProperties": false
+}

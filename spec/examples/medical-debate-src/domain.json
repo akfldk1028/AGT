@@ -1,0 +1,7 @@
+{
+  "name": "medical",
+  "expertise_level": "specialist",
+  "topics": ["cardiology", "internal-medicine", "pharmacology", "evidence-based-medicine"],
+  "evidence_standards": "peer-reviewed",
+  "terminology_preference": "professional"
+}
