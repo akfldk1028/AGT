@@ -12,11 +12,11 @@ import {
   REQUIRED_FILES,
   AGT_VERSION,
 } from '@agt/core';
-import type { ValidationResult, ValidationError, ValidationWarning } from '@agt/core';
+import type { ValidationResult, ValidationIssue, ValidationWarning } from '@agt/core';
 
 /** Validate an .agt file */
 export async function validate(agtPath: string): Promise<ValidationResult> {
-  const errors: ValidationError[] = [];
+  const errors: ValidationIssue[] = [];
   const warnings: ValidationWarning[] = [];
 
   // 1. Read file
@@ -142,7 +142,7 @@ async function validateJsonFile(
   zip: JSZip,
   fileName: string,
   schema: { safeParse: (data: unknown) => { success: boolean; error?: { issues: Array<{ path: (string | number)[]; message: string }> } } },
-  errors: ValidationError[],
+  errors: ValidationIssue[],
 ): Promise<void> {
   const raw = await zip.file(fileName)!.async('string');
   let json: unknown;

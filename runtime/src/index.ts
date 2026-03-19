@@ -14,6 +14,9 @@ export { SqliteVecAdapter } from './memory/sqlite-vec.js';
 export { KnowledgeGraphManager } from './memory/knowledge-graph.js';
 export { McpManager } from './mcp/index.js';
 export { ToolBridge } from './mcp/tool-bridge.js';
+export { TraceCollector } from './traces/index.js';
+export type { TraceStep, Trace } from './traces/index.js';
+export { TraceStore } from './traces/store.js';
 
 import { readFile } from 'node:fs/promises';
 import { rm } from 'node:fs/promises';

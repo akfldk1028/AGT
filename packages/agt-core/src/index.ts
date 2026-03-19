@@ -1,5 +1,26 @@
 // @agt/core — Main export
-// Types, schemas, and constants for the .agt file format
+// Types, schemas, constants, errors, and events for the .agt file format
+
+// Errors
+export {
+  AgtError,
+  ValidationError,
+  LoadError,
+  LLMError,
+  MemoryError,
+  PackageError,
+} from './errors.js';
+
+// Events
+export {
+  EventBus,
+  bus,
+} from './events.js';
+
+export type {
+  AgtEventType,
+  AgtEvent,
+} from './events.js';
 
 export type {
   Author,
@@ -29,7 +50,7 @@ export type {
   MemoryEntry,
   AgentBundle,
   ValidationResult,
-  ValidationError,
+  ValidationIssue,
   ValidationWarning,
   LLMProvider,
   ChatMessage,

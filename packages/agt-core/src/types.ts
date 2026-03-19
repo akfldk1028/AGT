@@ -254,11 +254,11 @@ export interface AgentBundle {
 /** Validation result */
 export interface ValidationResult {
   valid: boolean;
-  errors: ValidationError[];
+  errors: ValidationIssue[];
   warnings: ValidationWarning[];
 }
 
-export interface ValidationError {
+export interface ValidationIssue {
   path: string;
   message: string;
   code: string;
